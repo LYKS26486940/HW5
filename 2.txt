@@ -4,20 +4,18 @@ SevSeg sevseg;
 
 const byte ROWS = 4; // 4 Rows
 const byte COLS = 4; // 4 Columns
-// ©w¸q Keypad ªº«öÁä
+// å®šç¾© Keypad çš„æŒ‰éµ
 char keys[ROWS][COLS] = {
   {'F', 'E', 'D', 'C'}, {'B', '3', '6', '9'},
   {'A', '2', '5', '8'}, {'0', '1', '4', '7'}
 };
-// ©w¸q Keypad ³s¨ì Arduino ªº±µ¸}
+// å®šç¾© Keypad é€£åˆ° Arduino çš„æ¥è…³
 byte rowPins[ROWS] = {5, 4, 3, 2};
-// ³s¨ì Keypad ªº 4 ­Ó Rows
+// é€£åˆ° Keypad çš„ 4 å€‹ Rows
 byte colPins[COLS] = {10, 9, 8, 7};
-// ³s¨ì Keypad ªº 4 ­Ó Columns
-// «Ø¥ß Keypad ª«¥ó
-Keypad keypad =
-  Keypad( makeKeymap(keys), rowPins,
-          colPins, ROWS, COLS );
+// é€£åˆ° Keypad çš„ 4 å€‹ Columns
+// å»ºç«‹ Keypad ç‰©ä»¶
+Keypad keypad =Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 void setup() {
   Serial.begin(9600);
   byte numDigits = 1;
@@ -26,12 +24,11 @@ void setup() {
   sevseg.begin(COMMON_CATHODE, numDigits, digitPins, segmentPins);
 }
 void loop() {
-  char key = keypad.getKey(); // Åª¨ú Keypadªº¿é¤J
+  char key = keypad.getKey(); // è®€å– Keypadçš„è¼¸å…¥
   if (key != NO_KEY) {
     Serial.println(key);
     if (key >= '0' && key <= '9')
       sevseg.setNumber(key - '0',1);
   }
-
   sevseg.refreshDisplay();
 }
